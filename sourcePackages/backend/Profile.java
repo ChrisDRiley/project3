@@ -57,6 +57,10 @@ public class Profile
             }
         }
     }
+    public Profile(String name, File profilePic){
+        userName = name;
+        profilePicture = profilePic.getName();
+    }
     
     /**
      * Getter method for username.
