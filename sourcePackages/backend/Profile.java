@@ -24,12 +24,14 @@ public class Profile
     
     /**
      * Default constructor for the Profile object
+     * @param lastName The last name of the profile.
+     * @param firstName The first name of the profile.
      * @throws FileNotFoundException If files are not found.
      */
-    public Profile() throws FileNotFoundException
+    public Profile(String lastName, String firstName) throws FileNotFoundException
     {
-        String pictureFile = "userPictures.txt"; //Will need to change.
-        String profileConfig = "profileConfig.txt"; //Will need to change.
+        String pictureFile = lastName + firstName + "userPictures.txt";
+        String profileConfig = lastName + firstName + "profileConfig.txt";
         String filePath = new File("").getAbsolutePath(); //Getting file path.
         File pictureLibrary = new File(filePath + pictureFile); //Need to check if I need to add "/" between the concat.
         File profileSetting = new File(filePath + profileConfig); //Need to check if I need to add "/" between the concat.
@@ -38,7 +40,7 @@ public class Profile
         Scanner fileRead = new Scanner(pictureLibrary);
         while (fileRead.hasNextLine())
         {
-            pictures.add(fileRead.nextLine());
+            pictures.add(filePath + fileRead.nextLine());
         }
         
         //Loading username and profile pictures into data members to be used by another class.
