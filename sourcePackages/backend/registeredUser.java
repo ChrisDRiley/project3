@@ -14,12 +14,17 @@ public class registeredUser extends guestUser{
     private String password;
     private File profilePic;
     
-    public registeredUser(String name, String pass, File profPic){
+    public registeredUser(String name, String pass, String profPic) throws FileNotFoundException{
         canLike = true;
         canComment = true;
         username = name;
         password = pass;
-        profilePic = profPic;
+        try{
+            profilePic = new File(profPic);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
     public String getUsername(){
         return username;

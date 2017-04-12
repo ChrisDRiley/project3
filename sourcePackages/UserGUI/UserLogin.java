@@ -9,6 +9,7 @@ package UserGUI;
  *
  * @author CJ
  */
+import backend.*;
 public class UserLogin extends javax.swing.JFrame {
 
     /**
@@ -43,6 +44,11 @@ public class UserLogin extends javax.swing.JFrame {
 
         btnGuest.setText("Use As Guest");
         btnGuest.setToolTipText("");
+        btnGuest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuestActionPerformed(evt);
+            }
+        });
 
         btnNew.setText("Create Account");
         btnNew.setToolTipText("");
@@ -135,6 +141,12 @@ public class UserLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnGuestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuestActionPerformed
+        GUI loader = new GUI();
+        loader.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnGuestActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -163,6 +175,9 @@ public class UserLogin extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        userDatabase uData = new userDatabase();
+        PostDatabase pData = new PostDatabase();
+        fileLoader loader = new fileLoader(uData,pData);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new UserLogin().setVisible(true);
