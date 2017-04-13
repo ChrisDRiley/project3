@@ -13,8 +13,11 @@ public class fileLoader {
     public fileLoader(userDatabase uData, PostDatabase pData) throws FileNotFoundException{
         input = new Scanner(new File("C:/Users/Christian/Documents/NetBeansProjects/project3/programData/users.txt"));
         while (input.hasNext()){
+            input.next();
             String a = input.next();
+            input.next();
             String b = input.next();
+            input.next();
             String c = input.next();
             registeredUser user = new registeredUser(a,b,c);
             uData.addUser(user);

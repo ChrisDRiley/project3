@@ -171,6 +171,7 @@ public class UserLogin extends javax.swing.JFrame {
         }
         try{
         uData.addUser(new registeredUser(user,pass,fileName));
+            System.out.println("Added "+uData.getUser(1).toString());
         }
         catch(FileNotFoundException e){
             e.printStackTrace();

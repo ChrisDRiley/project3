@@ -16,4 +16,7 @@ public class userDatabase {
     public registeredUser getUser(int index){
         return users.get(index);
     }
+    public int size(){
+        return users.size();
+    }
 }

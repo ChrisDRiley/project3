@@ -1,1 +1,1 @@
-Criley 12345 C:\Users\Christian\Documents\NetBeansProjects\project3\programData\images\Jerseys.png
+userName: Criley password: 12345 profilePicture: C:\Users\Christian\Documents\NetBeansProjects\project3\programData\images\Jerseys.png
