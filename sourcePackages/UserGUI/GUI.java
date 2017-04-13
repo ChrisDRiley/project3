@@ -29,6 +29,7 @@ public class GUI extends javax.swing.JFrame {
 
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jButton1 = new javax.swing.JButton();
+        jMenuItem1 = new javax.swing.JMenuItem();
         btnViewFeed = new javax.swing.JButton();
         btnProfile = new javax.swing.JButton();
         btnLougout = new javax.swing.JButton();
@@ -36,8 +37,11 @@ public class GUI extends javax.swing.JFrame {
         btnSearch = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
         btnLast = new javax.swing.JButton();
+        btnUpload = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,6 +58,8 @@ public class GUI extends javax.swing.JFrame {
         btnNext.setText("Next");
 
         btnLast.setText("Last");
+
+        btnUpload.setText("Upload A Photo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,6 +82,10 @@ public class GUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnNext)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(btnUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,7 +100,8 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 190, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
+                .addComponent(btnUpload))
         );
 
         pack();
@@ -137,8 +148,10 @@ public class GUI extends javax.swing.JFrame {
     public javax.swing.JButton btnNext;
     public javax.swing.JButton btnProfile;
     public javax.swing.JButton btnSearch;
+    public javax.swing.JButton btnUpload;
     public javax.swing.JButton btnViewFeed;
     private javax.swing.JButton jButton1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
