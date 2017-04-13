@@ -10,8 +10,12 @@ package UserGUI;
  * @author CJ
  */
 import backend.*;
+import java.io.*;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 public class UserLogin extends javax.swing.JFrame {
-
+    public static userDatabase uData;
+    public static PostDatabase pData;
     /**
      * Creates new form UserLogin
      */
@@ -52,6 +56,11 @@ public class UserLogin extends javax.swing.JFrame {
 
         btnNew.setText("Create Account");
         btnNew.setToolTipText("");
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         jLabel1.setText("Username:");
@@ -135,7 +144,7 @@ public class UserLogin extends javax.swing.JFrame {
                 .addComponent(btnGuest)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnNew)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
@@ -147,10 +156,31 @@ public class UserLogin extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnGuestActionPerformed
 
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+        String user = txtUsername.getText();
+        String pass = txtPassword.getText();
+        String fileName = "";
+        int selection = JOptionPane.showConfirmDialog(null, "Please select an image for you profile",
+                "Attention", JOptionPane.DEFAULT_OPTION, 
+                JOptionPane.INFORMATION_MESSAGE, null);
+        if(selection == 0){
+            JFileChooser chooser = new JFileChooser();
+            chooser.showOpenDialog(null);
+            File f = chooser.getSelectedFile();
+            fileName = f.getAbsolutePath();
+        }
+        try{
+        uData.addUser(new registeredUser(user,pass,fileName));
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnNewActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[])throws FileNotFoundException {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -175,8 +205,8 @@ public class UserLogin extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        userDatabase uData = new userDatabase();
-        PostDatabase pData = new PostDatabase();
+        uData = new userDatabase();
+        pData = new PostDatabase();
         fileLoader loader = new fileLoader(uData,pData);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
