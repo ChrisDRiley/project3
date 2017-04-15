@@ -21,6 +21,7 @@ public class Profile
     private boolean followed;
     private String userName;
     private String profilePicture;
+    private boolean exist;
     
     /**
      * Default constructor for the Profile object
@@ -29,6 +30,7 @@ public class Profile
      */
     public Profile(String userName) throws FileNotFoundException
     {
+        exist = true;
         String pictureFile = userName + "userPictures.txt";
         String profileConfig = userName + "profileConfig.txt";
         String filePath = new File("").getAbsolutePath(); //Getting file path.
@@ -62,6 +64,23 @@ public class Profile
     public Profile(String name, File profilePic){
         userName = name;
         profilePicture = profilePic.getName();
+    }
+    
+    /**
+     * Constructor to be used when a user with a given name does not exist.
+     */
+    public Profile()
+    {
+        exist = false;
+    }
+    
+    /**
+     * Getter method to check if a user exist.
+     * @return True if the user exists, false if the user does not exist.
+     */
+    public boolean userExist()
+    {
+        return exist;
     }
     
     /**

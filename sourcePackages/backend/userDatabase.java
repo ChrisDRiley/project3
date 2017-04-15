@@ -1,4 +1,6 @@
-
+/*
+Need to be updated so that when the object is created, it loads a list of existing users into an ArrayList.
+*/
 
 package backend;
 import java.util.ArrayList;
