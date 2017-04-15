@@ -15,11 +15,10 @@ import java.util.Scanner;
  */
 public class SearchEngine 
 {
-    private userDatabase users = new userDatabase();
-    
     //Will change.
     public Profile searchUser(String userName) throws FileNotFoundException
     {
+        userDatabase users = new userDatabase();
         boolean exist = false;
         int position = 0;
         
@@ -38,8 +37,14 @@ public class SearchEngine
         }
         else
         {
-            Profile account = new Profile(); //Need to create a constructor for when no accounts exists.
+            Profile account = new Profile();
             return account;
         }
+    }
+    
+    public Post searchTag(String hashtag)
+    {
+        PostDatabase posts = new PostDatabase();
+        
     }
 }
