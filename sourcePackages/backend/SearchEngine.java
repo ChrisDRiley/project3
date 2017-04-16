@@ -5,9 +5,8 @@
  */
 package backend;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  *
@@ -42,9 +41,22 @@ public class SearchEngine
         }
     }
     
-    public Post searchTag(String hashtag)
+    public ArrayList searchTag(String hashtag)
     {
         PostDatabase posts = new PostDatabase();
+        ArrayList<Post> postings = new ArrayList<>();
+        boolean exist = false;
         
+        for (int i = 0; i < posts.size(); i++)
+        {
+            ArrayList<String> tags = posts.getPost(i).getHashtags();
+            for (int j = 0; j < tags.size(); j++)
+            {
+                if (hashtag.equalsIgnoreCase(tags.get(j)))
+                {
+                    postings.add(posts.getPost(i));
+                }
+            }
+        }
     }
 }

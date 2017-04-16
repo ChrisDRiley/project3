@@ -1,3 +1,6 @@
+/*
+Need to be updated so that when the object is created, it loads a list of posts into an ArrayList.
+*/
 
 package backend;
 
@@ -14,5 +17,10 @@ public class PostDatabase {
     }
     public Post getPost(int index){
         return posts.get(index);
+    }
+    
+    public int size()
+    {
+        return posts.size();
     }
 }
