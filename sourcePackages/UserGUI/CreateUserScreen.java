@@ -5,6 +5,13 @@
  */
 package UserGUI;
 
+import static UserGUI.UserLogin.uData;
+import backend.registeredUser;
+import java.io.File;
+import java.io.FileNotFoundException;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author CJ
@@ -52,6 +59,11 @@ public class CreateUserScreen extends javax.swing.JFrame {
         jLabel4.setText("Repeat Password: ");
 
         jButton1.setText("Create!");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -112,11 +124,43 @@ public class CreateUserScreen extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(!txtEnterPass.getText().equals(txtPassConfirm.getText())){
+                JOptionPane.showConfirmDialog(null, "The two passwords do not match, enter again",
+                "Attention", JOptionPane.DEFAULT_OPTION, 
+                JOptionPane.INFORMATION_MESSAGE, null);
+        }
+        else{
+        String user = txtUserName.getText();
+        String pass = txtEnterPass.getText();
+        String fileName = "";
+        int selection = JOptionPane.showConfirmDialog(null, "Please select an image for you profile",
+                "Attention", JOptionPane.DEFAULT_OPTION, 
+                JOptionPane.INFORMATION_MESSAGE, null);
+        if(selection == 0){
+            JFileChooser chooser = new JFileChooser();
+            chooser.showOpenDialog(null);
+            File f = chooser.getSelectedFile();
+            fileName = f.getAbsolutePath();
+        }
+        try{
+        uData.addUser(new registeredUser(user,pass,fileName));
+            System.out.println("Added "+uData.getUser(1).toString());
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }
+        }
+        ProfileScreen prof = new ProfileScreen();
+        prof.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

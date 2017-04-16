@@ -158,25 +158,9 @@ public class UserLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuestActionPerformed
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-        String user = txtUsername.getText();
-        String pass = txtPassword.getText();
-        String fileName = "";
-        int selection = JOptionPane.showConfirmDialog(null, "Please select an image for you profile",
-                "Attention", JOptionPane.DEFAULT_OPTION, 
-                JOptionPane.INFORMATION_MESSAGE, null);
-        if(selection == 0){
-            JFileChooser chooser = new JFileChooser();
-            chooser.showOpenDialog(null);
-            File f = chooser.getSelectedFile();
-            fileName = f.getAbsolutePath();
-        }
-        try{
-        uData.addUser(new registeredUser(user,pass,fileName));
-            System.out.println("Added "+uData.getUser(1).toString());
-        }
-        catch(FileNotFoundException e){
-            e.printStackTrace();
-        }
+        CreateUserScreen uCreate = new CreateUserScreen();
+        uCreate.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnNewActionPerformed
 
     /**
