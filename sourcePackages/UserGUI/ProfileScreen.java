@@ -11,7 +11,7 @@ package UserGUI;
  */
 import java.awt.event.*;
 import javax.swing.JToggleButton;
-public class ProfileScreen extends javax.swing.JFrame implements ItemListener {
+public class ProfileScreen extends javax.swing.JFrame {
 
     /**
      * Creates new form ProfileScreen
@@ -43,21 +43,26 @@ public class ProfileScreen extends javax.swing.JFrame implements ItemListener {
             }
         });
 
-        jToggleButton1.setText("jToggleButton1");
+        jToggleButton1.setText("Follow User");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(104, 104, 104)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(jToggleButton1)))
                 .addContainerGap(117, Short.MAX_VALUE))
         );
@@ -77,8 +82,20 @@ public class ProfileScreen extends javax.swing.JFrame implements ItemListener {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        GUI feed = new GUI();
+        feed.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        JToggleButton btn = (JToggleButton) evt.getSource();
+        if(btn.isSelected()){
+            jToggleButton1.setText("Unfollow User");
+        }
+        else{
+            jToggleButton1.setText("Follow User");
+        }
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -115,14 +132,9 @@ public class ProfileScreen extends javax.swing.JFrame implements ItemListener {
         });
         
     }
-    public void itemStateChanged(ItemEvent e){
-        if (e.getStateChange() == ItemEvent.SELECTED){
-            jToggleButton1.setText("Unfollow User");
-        }
-        else{
-            jToggleButton1.setText("Follow User");
-        }
-    }
+
+
+       
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
