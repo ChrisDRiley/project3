@@ -14,10 +14,16 @@ import java.util.ArrayList;
  */
 public class SearchEngine 
 {
-    //Will change.
-    public Profile searchUser(String userName) throws FileNotFoundException
+    /**
+     * This method will search through the user database for a matching username.
+     * @param userName The name of the profile to be searched.
+     * @param users The database that will be used for the search.
+     * @return It will return a profile object to be manipulated by another class,
+     * if it does not exist then it will create a profile with the exist flag turned to false.
+     * @throws FileNotFoundException 
+     */
+    public Profile searchUser(String userName, userDatabase users) throws FileNotFoundException
     {
-        userDatabase users = new userDatabase();
         boolean exist = false;
         int position = 0;
         
@@ -41,11 +47,15 @@ public class SearchEngine
         }
     }
     
-    public ArrayList searchTag(String hashtag)
+    /**
+     * This method will search through the post database for any posts with a matching hashtag.
+     * @param hashtag The hashtag to be searched.
+     * @param posts The database to be used for the search.
+     * @return It will return an ArrayList of posts with matching hashtags to be manipulated by another class.
+     */
+    public ArrayList searchTag(String hashtag, PostDatabase posts)
     {
-        PostDatabase posts = new PostDatabase();
         ArrayList<Post> postings = new ArrayList<>();
-        boolean exist = false;
         
         for (int i = 0; i < posts.size(); i++)
         {
@@ -58,5 +68,6 @@ public class SearchEngine
                 }
             }
         }
+        return postings; //Must do some testings to see what it will return if no matches are found, might need to be handled by the invoking class.
     }
 }
