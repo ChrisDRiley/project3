@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  * @author CJ
  */
 public class CreateUserScreen extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form CreateUserScreen
      */
@@ -150,16 +150,17 @@ public class CreateUserScreen extends javax.swing.JFrame {
             fileName = f.getAbsolutePath();
         }
         try{
-        uData.addUser(new registeredUser(user,pass,fileName));
+        UserLogin.uData.addUser(new registeredUser(user,pass,fileName));
             System.out.println("Added "+uData.getUser(1).toString());
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
         }
-        }
-        ProfileScreen prof = new ProfileScreen();
+        int check = UserLogin.uData.size();
+        ProfileScreen prof = new ProfileScreen(uData.getUser(1));
         prof.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

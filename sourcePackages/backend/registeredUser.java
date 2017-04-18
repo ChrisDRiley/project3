@@ -36,7 +36,6 @@ public class registeredUser extends guestUser{
         return profilePic;
     }
     public String toString(){
-        return "Username: "+username+", Password: "+password+", Profile"
-                + " Path: "+profilePic.getPath();
+        return "userName: "+username+", password: "+password+", profilePicture: "+profilePic.getPath();
     }
 }
