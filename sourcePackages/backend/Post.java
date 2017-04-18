@@ -43,4 +43,8 @@ public class Post {
     public registeredUser getUser(){
         return ownedBy;
     }
+    public LocalDateTime getTime()
+    {
+        return timePosted;
+    }
 }
