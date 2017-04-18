@@ -140,6 +140,11 @@ public class GUI extends javax.swing.JFrame {
                 new GUI().setVisible(true);
             }
         });
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new UserLogin().setVisible(true);
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
