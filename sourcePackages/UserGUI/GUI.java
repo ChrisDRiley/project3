@@ -50,6 +50,11 @@ public class GUI extends javax.swing.JFrame {
         btnProfile.setText("My Profile");
 
         btnLougout.setText("Logout");
+        btnLougout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLougoutActionPerformed(evt);
+            }
+        });
 
         txtSearch.setText("Search");
 
@@ -107,6 +112,14 @@ public class GUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnLougoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLougoutActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new UserLogin().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_btnLougoutActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -138,6 +151,11 @@ public class GUI extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GUI().setVisible(true);
+            }
+        });
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new UserLogin().setVisible(true);
             }
         });
     }
