@@ -16,6 +16,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import static UserGUI.UserLogin.uData;
 public class ProfileScreen extends javax.swing.JFrame {
 
     /**
@@ -26,20 +27,7 @@ public class ProfileScreen extends javax.swing.JFrame {
         initComponents();
         
     }
-    public ProfileScreen(registeredUser nUser){
-        user = nUser;
-        File pic = this.user.getPic();
-        String info = this.user.getUsername();
-        jLabel2.setText(this.user.getUsername()+"'s Profile");
-        String fileName = pic.getAbsolutePath();
-        try{
-            ImageIcon ii = new ImageIcon(scaleImage(120,120,ImageIO.read(new File(pic.getAbsolutePath()))));
-            jLabel1.setIcon(ii);
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,6 +44,11 @@ public class ProfileScreen extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jButton1.setText("Go To Feed");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -125,6 +118,16 @@ public class ProfileScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        try{
+            fileWriter writer = new fileWriter(uData);
+            System.out.println("Written");
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_formWindowClosing
+
     /**
      * @param args the command line arguments
      */
@@ -171,7 +174,22 @@ public class ProfileScreen extends javax.swing.JFrame {
         g2d.drawImage(img, 0, 0, w, h, null);
         g2d.dispose();
         return bi;
-    }  
+    }
+    public void setUser(registeredUser nUser){
+        user = nUser;
+        File pic = this.user.getPic();
+        String info = this.user.getUsername();
+        jLabel2.setText(this.user.getUsername()+"'s Profile");
+        String fileName = pic.getAbsolutePath();
+        try{
+            ImageIcon ii = new ImageIcon(scaleImage(120,120,ImageIO.read(new File(pic.getAbsolutePath()))));
+            jLabel1.setIcon(ii);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+ 
     private registeredUser user;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

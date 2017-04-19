@@ -19,6 +19,8 @@ public class fileWriter{
         for(int i = 0; i < uData.size(); i++){
             writer.println(uData.getUser(i).toString());
         }
+        writer.flush();
+        writer.close();
     }
 }
 

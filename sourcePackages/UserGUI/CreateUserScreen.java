@@ -150,14 +150,14 @@ public class CreateUserScreen extends javax.swing.JFrame {
             fileName = f.getAbsolutePath();
         }
         try{
-        UserLogin.uData.addUser(new registeredUser(user,pass,fileName));
-            System.out.println("Added "+uData.getUser(1).toString());
+            uData.addUser(new registeredUser(user,pass,fileName));
+            System.out.println("Added "+uData.getUser(0).toString());
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
         }
-        int check = UserLogin.uData.size();
-        ProfileScreen prof = new ProfileScreen(uData.getUser(1));
+        ProfileScreen prof = new ProfileScreen();
+        prof.setUser(uData.getUser(0));
         prof.setVisible(true);
         this.dispose();
         }
