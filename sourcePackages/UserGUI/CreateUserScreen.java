@@ -148,40 +148,44 @@ public class CreateUserScreen extends javax.swing.JFrame {
                 JOptionPane.INFORMATION_MESSAGE, null);
         }
         else{
-        String user = txtUserName.getText();
-        String pass = txtEnterPass.getText();
-        String fileName = "";
-        int selection = JOptionPane.showConfirmDialog(null, "Please select an image for you profile",
+            String user = txtUserName.getText();
+            String pass = txtEnterPass.getText();
+            String fileName = "";
+            int selection = JOptionPane.showConfirmDialog(null, "Please select an image for you profile",
                 "Attention", JOptionPane.DEFAULT_OPTION, 
                 JOptionPane.INFORMATION_MESSAGE, null);
-        if(selection == 0){
-            JFileChooser chooser = new JFileChooser();
-            chooser.showOpenDialog(null);
-            File f = chooser.getSelectedFile();
-            fileName = f.getAbsolutePath();
-        }
-        try{
-            uData.addUser(new registeredUser(user,pass,fileName));
-            System.out.println("Added "+uData.getUser(0).toString());
-        }
-        catch(FileNotFoundException e){
-            e.printStackTrace();
-        }
-        ProfileScreen prof = new ProfileScreen();
-        prof.setUser(uData.getUser(0));
-        prof.setVisible(true);
-        this.dispose();
+            if(selection == 0){
+                JFileChooser chooser = new JFileChooser();
+                chooser.showOpenDialog(null);
+                File f = chooser.getSelectedFile();
+                fileName = f.getAbsolutePath();
+            }
+            try{
+                uData.addUser(new registeredUser(user,pass,fileName));
+                System.out.println("Added "+uData.getUser(0).toString());
+            }
+            catch(FileNotFoundException e){
+                e.printStackTrace();
+            }
+            ProfileScreen prof = new ProfileScreen();
+            prof.setUser(uData.getUser(0));
+            prof.setVisible(true);
+            this.dispose();
+            //closes out of create user window
+            setVisible(false);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     
     //closes out create user screen if user decides not to create account
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        if(btnCancel.hasFocus()) {
-            System.exit(0);
-        }
-            
+        if(btnCancel.isEnabled()) {
+            setVisible(false);
+            UserLogin log = new UserLogin();
+            log.setVisible(true);           
+        }          
     }//GEN-LAST:event_btnCancelActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */
