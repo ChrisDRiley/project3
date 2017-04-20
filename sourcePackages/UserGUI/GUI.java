@@ -13,6 +13,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -81,6 +82,11 @@ public class GUI extends javax.swing.JFrame {
         });
 
         btnLast.setText("Last");
+        btnLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLastActionPerformed(evt);
+            }
+        });
 
         btnUpload.setText("Upload A Photo");
 
@@ -159,17 +165,42 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLougoutActionPerformed
 
     private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
-        ProfileScreen prof = new ProfileScreen();
-        prof.setUser(currentUser);
-        prof.setVisible(true);
-        this.dispose();
+        if(currentUser ==null){
+            JOptionPane.showConfirmDialog(null, "Guest users do not have a profile.",
+            "Attention", JOptionPane.DEFAULT_OPTION, 
+            JOptionPane.INFORMATION_MESSAGE, null);
+        }
+        else{
+            ProfileScreen prof = new ProfileScreen();
+            prof.setUser(currentUser);
+            prof.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_btnProfileActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         if(pData.size()-1 != index){
             currentPost(pData.getPost(index+1));
+            index++;
+        }
+        else{
+            JOptionPane.showConfirmDialog(null, "There are no more posts to see",
+            "Attention", JOptionPane.DEFAULT_OPTION, 
+            JOptionPane.INFORMATION_MESSAGE, null);
         }
     }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
+        if(index != 0){
+            currentPost(pData.getPost(index-1));
+            index--;
+        }
+        else{
+            JOptionPane.showConfirmDialog(null, "Cannot go back any further",
+            "Attention", JOptionPane.DEFAULT_OPTION, 
+            JOptionPane.INFORMATION_MESSAGE, null);
+        }
+    }//GEN-LAST:event_btnLastActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,6 +248,12 @@ public class GUI extends javax.swing.JFrame {
         Post post = pData.getPost(index);
         currentPost(post);
         
+    }
+    public void guestFeed(PostDatabase pd){
+        index = 0;
+        pData = pd;
+        Post post = pData.getPost(index);
+        currentPost(post);
     }
     public void currentPost(Post post){
         File fileName = post.getPic();
