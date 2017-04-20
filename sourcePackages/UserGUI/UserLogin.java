@@ -45,6 +45,11 @@ public class UserLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         btnGuest.setText("Use As Guest");
         btnGuest.setToolTipText("");
@@ -162,6 +167,30 @@ public class UserLogin extends javax.swing.JFrame {
         uCreate.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnNewActionPerformed
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        Login currentUser = new Login(txtUsername.getText(), txtPassword.getText(), uData);
+        GUI loggedin = new GUI(); //Need to create a param to accept user logged in to carry data over.
+        if (currentUser.getUserExist())
+        {
+            if (currentUser.getMatchingPassword())
+            {
+                loggedin.setVisible(true);
+            }
+            else
+            {
+                JOptionPane.showConfirmDialog(null, "The password does not match!",
+                    "Attention", JOptionPane.DEFAULT_OPTION, 
+                    JOptionPane.INFORMATION_MESSAGE, null);
+                txtPassword.setText("");
+            }
+            JOptionPane.showConfirmDialog(null, "The user does not exist!",
+                "Attention", JOptionPane.DEFAULT_OPTION, 
+                JOptionPane.INFORMATION_MESSAGE, null);
+            txtUsername.setText("");
+            txtPassword.setText("");
+        }
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
