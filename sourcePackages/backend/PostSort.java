@@ -6,7 +6,7 @@
 package backend;
 
 /**
- * This class will be used to sort posts starting with the most rescent.
+ * This class will be used to sort posts starting with the most recent.
  * @author Daniel M.
  */
 public class PostSort 

@@ -24,3 +24,5 @@ public class fileLoader {
         }
     }
 }
+
+// I think the .next() method will keep reading unless theres a delimiter, might want to do nextLine().
