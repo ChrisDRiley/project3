@@ -136,6 +136,16 @@ public class CreateUserScreen extends javax.swing.JFrame {
                 "Attention", JOptionPane.DEFAULT_OPTION, 
                 JOptionPane.INFORMATION_MESSAGE, null);
         }
+        else if(txtEnterPass.getText().isEmpty()){
+                JOptionPane.showConfirmDialog(null, "Password field is empty, please enter a password",
+                "Attention", JOptionPane.DEFAULT_OPTION, 
+                JOptionPane.INFORMATION_MESSAGE, null);
+        }
+        else if(txtUserName.getText().isEmpty()){
+                JOptionPane.showConfirmDialog(null, "Username is empty, please enter a username",
+                "Attention", JOptionPane.DEFAULT_OPTION, 
+                JOptionPane.INFORMATION_MESSAGE, null);
+        }
         else{
         String user = txtUserName.getText();
         String pass = txtEnterPass.getText();

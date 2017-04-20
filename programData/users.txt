@@ -1,1 +1,2 @@
-userName: HELP, password: WHAT, profilePicture: C:\Users\Christian\Documents\5075600_sd.jpg
+userName: Christian password: Riley profilePicture: C:\Users\Christian\Downloads\ColdDwarf.png
+userName: GOD password: HELPUS profilePicture: C:\Users\Christian\Downloads\ProfPic.png
