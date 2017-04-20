@@ -13,9 +13,9 @@ public class Post {
     private registeredUser ownedBy;
     private LocalDateTime timePosted;
     
-    public Post(File pic, registeredUser user, ArrayList<String> hash){
-        String filePath = new File("").getAbsolutePath();
-        picture = new File(filePath + pic);
+    public Post(String pic, registeredUser user, ArrayList<String> hash){
+       
+        picture = new File(pic);
         ownedBy = user;
         comments = new ArrayList<String>();
         hashtags = new ArrayList<String>();
@@ -30,6 +30,9 @@ public class Post {
     }
     public void addComment(String comment){
         comments.add(comment);
+    }
+    public File getPic(){
+        return picture; 
     }
     public int getLikes(){
         return likes;

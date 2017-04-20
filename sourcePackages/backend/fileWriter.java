@@ -15,7 +15,8 @@ import java.util.*;
 public class fileWriter{
     PrintWriter writer = null;
     public fileWriter(userDatabase uData) throws FileNotFoundException{
-        writer = new PrintWriter("C:/Users/Christian/Documents/NetBeansProjects/project3/programData/users.txt");
+        writer = new PrintWriter(
+                new FileOutputStream("C:/Users/Christian/Documents/NetBeansProjects/project3/programData/users.txt",false));
         for(int i = 0; i < uData.size(); i++){
             writer.println(uData.getUser(i).toString());
         }
