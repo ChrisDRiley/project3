@@ -32,7 +32,7 @@ public class fileLoader {
         {
             String line = input.nextLine();
             String[] header = line.split("\\s+");
-            File picture = new File(header[0]);
+            String picture = header[0];
             String name = header[1];
             int position = -1;
             for (int i = 0; i < uData.size(); i++)
