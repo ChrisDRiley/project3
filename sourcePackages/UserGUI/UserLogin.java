@@ -220,9 +220,9 @@ public class UserLogin extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        uData = new userDatabase();
-        pData = new PostDatabase();
-        fileLoader loader = new fileLoader(uData,pData);
+        fileLoader loader = new fileLoader();
+        uData = loader.getUserDatabase();
+        pData = loader.getPostDatabase();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new UserLogin().setVisible(true);
