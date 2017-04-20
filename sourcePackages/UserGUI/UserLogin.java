@@ -41,6 +41,7 @@ public class UserLogin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
+        btnFAQ = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,6 +111,13 @@ public class UserLogin extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Instagram Lite");
 
+        btnFAQ.setText("?");
+        btnFAQ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFAQActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -134,7 +142,10 @@ public class UserLogin extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addGap(149, 149, 149)
                                     .addComponent(btnGuest, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 85, Short.MAX_VALUE)))
+                        .addGap(0, 85, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnFAQ)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -150,7 +161,8 @@ public class UserLogin extends javax.swing.JFrame {
                 .addComponent(btnGuest)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnNew)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(btnFAQ))
         );
 
         pack();
@@ -192,6 +204,12 @@ public class UserLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    private void btnFAQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFAQActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null,"Instagram Lite is a program created by" + " \nChristian Riley, Daniel, Mulyono, and Collin Johnson" + " \nfor our CPSC240 final project!",
+            "More Info", JOptionPane.DEFAULT_OPTION);
+    }//GEN-LAST:event_btnFAQActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -231,6 +249,7 @@ public class UserLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFAQ;
     public javax.swing.JButton btnGuest;
     public javax.swing.JButton btnLogin;
     public javax.swing.JButton btnNew;

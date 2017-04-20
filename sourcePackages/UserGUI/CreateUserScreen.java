@@ -167,6 +167,7 @@ public class CreateUserScreen extends javax.swing.JFrame {
             catch(FileNotFoundException e){
                 e.printStackTrace();
             }
+            //opens user profile
             ProfileScreen prof = new ProfileScreen();
             prof.setUser(uData.getUser(0));
             prof.setVisible(true);
