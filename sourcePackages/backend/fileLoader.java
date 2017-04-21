@@ -10,9 +10,9 @@ import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 public class fileLoader {
-    Scanner input;
-    userDatabase uData;
-    PostDatabase pData;
+    private Scanner input;
+    private userDatabase uData;
+    private PostDatabase pData;
     
     public fileLoader() throws FileNotFoundException{
         input = new Scanner(new File("C:/Users/Christian/Documents/NetBeansProjects/project3/programData/users.txt"));

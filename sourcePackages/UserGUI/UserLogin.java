@@ -14,8 +14,8 @@ import java.io.*;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 public class UserLogin extends javax.swing.JFrame {
-    public static userDatabase uData;
-    public static PostDatabase pData;
+    private static userDatabase uData;
+    private static PostDatabase pData;
     /**
      * Creates new form UserLogin
      */
@@ -210,6 +210,16 @@ public class UserLogin extends javax.swing.JFrame {
             "More Info", JOptionPane.DEFAULT_OPTION);
     }//GEN-LAST:event_btnFAQActionPerformed
 
+    public userDatabase getUserDatabase()
+    {
+        return uData;
+    }
+    
+    public PostDatabase getPostDatabase()
+    {
+        return pData;
+    }
+    
     /**
      * @param args the command line arguments
      */

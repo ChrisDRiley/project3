@@ -11,8 +11,12 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -39,6 +43,7 @@ public class GUI extends javax.swing.JFrame {
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jButton1 = new javax.swing.JButton();
         jMenuItem1 = new javax.swing.JMenuItem();
+        fileChooser = new javax.swing.JFileChooser();
         btnProfile = new javax.swing.JButton();
         btnLougout = new javax.swing.JButton();
         txtSearch = new javax.swing.JTextField();
@@ -83,6 +88,11 @@ public class GUI extends javax.swing.JFrame {
         btnLast.setText("Last");
 
         btnUpload.setText("Upload A Photo");
+        btnUpload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUploadActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("currentPost");
 
@@ -133,9 +143,9 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnLast, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(164, 164, 164))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -171,6 +181,28 @@ public class GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnNextActionPerformed
 
+    private void btnUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadActionPerformed
+        /*
+        Might want to add a file filter to the fileChooser to only accept images, refer to:
+        https://docs.oracle.com/javase/tutorial/uiswing/components/filechooser.html#filters
+        */
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION)
+        {
+            Upload uploadPreview;
+            try {
+                uploadPreview = new Upload(fileChooser.getSelectedFile());
+                uploadPreview.setVisible(true);
+            } catch (IOException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnUploadActionPerformed
+    
+    public File getFile()
+    {
+        return fileChooser.getSelectedFile();
+    }
     /**
      * @param args the command line arguments
      */
@@ -250,6 +282,7 @@ public class GUI extends javax.swing.JFrame {
     public javax.swing.JButton btnProfile;
     public javax.swing.JButton btnSearch;
     public javax.swing.JButton btnUpload;
+    private javax.swing.JFileChooser fileChooser;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
