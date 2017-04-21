@@ -267,6 +267,27 @@ public class GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
+        if(index != 0){
+            currentPost(pData.getPost(index-1));
+            index--;
+        }
+        else{
+            JOptionPane.showConfirmDialog(null, "Cannot go back any further",
+            "Attention", JOptionPane.DEFAULT_OPTION, 
+            JOptionPane.INFORMATION_MESSAGE, null);
+        }
+    }//GEN-LAST:event_btnLastActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(jLabel4.getText().equals("Main Feed") || 
+                jLabel4.getText().equals("Main Feed (Guest)")){
+            JOptionPane.showConfirmDialog(null, "You are currently on the main feed",
+            "Attention", JOptionPane.DEFAULT_OPTION, 
+            JOptionPane.INFORMATION_MESSAGE, null);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     private void btnUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadActionPerformed
         /*
         Might want to add a file filter to the fileChooser to only accept images, refer to:
