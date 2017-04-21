@@ -142,11 +142,11 @@ public class UserLogin extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addGap(149, 149, 149)
                                     .addComponent(btnGuest, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 85, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnFAQ)))
+                        .addGap(0, 85, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnFAQ))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,6 +170,7 @@ public class UserLogin extends javax.swing.JFrame {
 
     private void btnGuestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuestActionPerformed
         GUI loader = new GUI();
+        loader.guestFeed(pData);
         loader.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnGuestActionPerformed
@@ -186,7 +187,14 @@ public class UserLogin extends javax.swing.JFrame {
         if (currentUser.getUserExist())
         {
             if (currentUser.getMatchingPassword())
-            {
+            {   
+                registeredUser match = null;
+                for(int i = 0; i < uData.size(); i++){
+                    if(uData.getUser(i).getUsername().equalsIgnoreCase(txtUsername.getText())){
+                        match = uData.getUser(i);
+                    }
+                }
+                loggedin.defaultFeed(pData, match);
                 loggedin.setVisible(true);
             }
             else
@@ -196,6 +204,9 @@ public class UserLogin extends javax.swing.JFrame {
                     JOptionPane.INFORMATION_MESSAGE, null);
                 txtPassword.setText("");
             }
+ 
+        }
+        else{
             JOptionPane.showConfirmDialog(null, "The user does not exist!",
                 "Attention", JOptionPane.DEFAULT_OPTION, 
                 JOptionPane.INFORMATION_MESSAGE, null);
