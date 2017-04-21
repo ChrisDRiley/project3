@@ -15,6 +15,7 @@ public class fileLoader {
     PostDatabase pData;
     
     public fileLoader() throws FileNotFoundException{
+        uData = new userDatabase();
         input = new Scanner(new File("C:/Users/Christian/Documents/NetBeansProjects/project3/programData/users.txt"));
         while (input.hasNext()){
             input.next();
@@ -24,10 +25,11 @@ public class fileLoader {
             input.next();
             String c = input.next();
             registeredUser user = new registeredUser(a,b,c);
-            this.uData.addUser(user);
+            uData.addUser(user);
         }
         
         input = new Scanner(new File("C:/Users/Christian/Documents/NetBeansProjects/project3/programData/posts.txt"));
+        pData = new PostDatabase();
         while (input.hasNextLine())
         {
             String line = input.nextLine();
