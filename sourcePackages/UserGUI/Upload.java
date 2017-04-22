@@ -5,9 +5,18 @@
  */
 package UserGUI;
 
+import java.awt.BorderLayout;
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -18,13 +27,15 @@ import javax.swing.JLabel;
  */
 public class Upload extends javax.swing.JFrame {
 
+    BufferedImage img;
+    JLabel picLabel;
     /**
      * Creates new form Upload
      */
     public Upload(File file) throws IOException {
         initComponents();
-        BufferedImage img = ImageIO.read(file);
-        JLabel picLabel = new JLabel(new ImageIcon(img));
+        img = ImageIO.read(file);
+        picLabel = new JLabel(new ImageIcon(img));
         picturePreview.add(picLabel);
         picturePreview.setVisible(true);
     }
@@ -122,7 +133,38 @@ public class Upload extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void uploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadActionPerformed
-        // TODO add your handling code here:
+        File file = new File("C:/Users/Christian/Documents/NetBeansProjects/project3/index.txt");
+        int index = 0;
+        try {
+            try (Scanner fileRead = new Scanner(file)) {
+                index = Integer.parseInt(fileRead.nextLine());
+                fileRead.close();
+            }
+            index++;
+        } catch (FileNotFoundException ex) {
+            try (PrintWriter writer = new PrintWriter(file, "UTF-8")) {
+                try (BufferedWriter fileWrite = new BufferedWriter(new FileWriter(file))) {
+            fileWrite.write(Integer.toString(index));
+            fileWrite.flush();
+        }       catch (IOException ex1) {
+                    Logger.getLogger(Upload.class.getName()).log(Level.SEVERE, null, ex1);
+                }
+        }   catch (FileNotFoundException ex1) {
+                Logger.getLogger(Upload.class.getName()).log(Level.SEVERE, null, ex1);
+            } catch (UnsupportedEncodingException ex1) {
+                Logger.getLogger(Upload.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        
+        String  filename = Integer.toString(index);
+        File filePath = new File("C:/Users/Christian/Documents/NetBeansProjects/project3/" + filename + ".jpg");
+        try {
+            ImageIO.write(img, "jpg", filePath);
+        } catch (IOException ex1) {
+            Logger.getLogger(Upload.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+        
+        
     }//GEN-LAST:event_uploadActionPerformed
 
     private void hashtagTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hashtagTextFieldActionPerformed
@@ -130,7 +172,7 @@ public class Upload extends javax.swing.JFrame {
     }//GEN-LAST:event_hashtagTextFieldActionPerformed
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(true);
     }//GEN-LAST:event_cancelActionPerformed
 
     /**
