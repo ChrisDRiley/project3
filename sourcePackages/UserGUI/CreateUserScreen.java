@@ -5,8 +5,8 @@
  */
 package UserGUI;
 
-import static UserGUI.UserLogin.uData;
-import backend.registeredUser;
+
+import backend.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import javax.swing.JFileChooser;
@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  * @author CJ
  */
 public class CreateUserScreen extends javax.swing.JFrame {
-    
+    public static userDatabase uData;
     /**
      * Creates new form CreateUserScreen
      */
@@ -225,6 +225,7 @@ public class CreateUserScreen extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        uData = UserLogin.uData;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CreateUserScreen().setVisible(true);

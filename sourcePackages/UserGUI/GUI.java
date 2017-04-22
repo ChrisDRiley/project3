@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
  * @author CJ
  */
 public class GUI extends javax.swing.JFrame {
-
+    public static userDatabase uData;
     /**
      * Creates new form GUI
      */
@@ -56,8 +56,9 @@ public class GUI extends javax.swing.JFrame {
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -128,6 +129,8 @@ public class GUI extends javax.swing.JFrame {
 
         jLabel3.setText("OwnedBy");
 
+        jLabel4.setText("Currently Showing:");
+
         jButton2.setText("Main Feed");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,7 +138,12 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Currently Showing:");
+        jButton3.setText("Like Post");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -152,14 +160,18 @@ public class GUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                        .addContainerGap()
                         .addComponent(jButton2)
-                        .addGap(45, 45, 45)
+                        .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton3))
+                                .addComponent(btnUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(btnLougout))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -177,12 +189,6 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnLast, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(164, 164, 164))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnProfile)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
@@ -199,8 +205,10 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 83, Short.MAX_VALUE)))
-                .addComponent(jLabel2)
+                        .addGap(0, 74, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUpload)
@@ -246,47 +254,9 @@ public class GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnNextActionPerformed
 
-    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
-        if(index != 0){
-            currentPost(pData.getPost(index-1));
-            index--;
-        }
-        else{
-            JOptionPane.showConfirmDialog(null, "Cannot go back any further",
-            "Attention", JOptionPane.DEFAULT_OPTION, 
-            JOptionPane.INFORMATION_MESSAGE, null);
-        }
-    }//GEN-LAST:event_btnLastActionPerformed
+                                  
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(jLabel4.getText().equals("Main Feed") || 
-                jLabel4.getText().equals("Main Feed (Guest)")){
-            JOptionPane.showConfirmDialog(null, "You are currently on the main feed",
-            "Attention", JOptionPane.DEFAULT_OPTION, 
-            JOptionPane.INFORMATION_MESSAGE, null);
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
-        if(index != 0){
-            currentPost(pData.getPost(index-1));
-            index--;
-        }
-        else{
-            JOptionPane.showConfirmDialog(null, "Cannot go back any further",
-            "Attention", JOptionPane.DEFAULT_OPTION, 
-            JOptionPane.INFORMATION_MESSAGE, null);
-        }
-    }//GEN-LAST:event_btnLastActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(jLabel4.getText().equals("Main Feed") || 
-                jLabel4.getText().equals("Main Feed (Guest)")){
-            JOptionPane.showConfirmDialog(null, "You are currently on the main feed",
-            "Attention", JOptionPane.DEFAULT_OPTION, 
-            JOptionPane.INFORMATION_MESSAGE, null);
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
+                                            
 
     private void btnUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadActionPerformed
         /*
@@ -305,6 +275,38 @@ public class GUI extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnUploadActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(jLabel4.getText().equals("Main Feed") || 
+        jLabel4.getText().equals("Main Feed (Guest)")){
+            JOptionPane.showConfirmDialog(null, "You are currently on the main feed",
+            "Attention", JOptionPane.DEFAULT_OPTION, 
+            JOptionPane.INFORMATION_MESSAGE, null);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
+        if(index != 0){
+            currentPost(pData.getPost(index - 1));
+            index--;
+        }
+        else{
+            JOptionPane.showConfirmDialog(null, "Cannot go back any further",
+            "Attention", JOptionPane.DEFAULT_OPTION, 
+            JOptionPane.INFORMATION_MESSAGE, null);
+        }
+    }//GEN-LAST:event_btnLastActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if(currentUser == null){
+            JOptionPane.showConfirmDialog(null, "Guest users cannot like posts",
+            "Attention", JOptionPane.DEFAULT_OPTION,
+            JOptionPane.INFORMATION_MESSAGE, null);
+        }
+        else{
+            pData.getPost(index).addLike();
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
     
     public File getFile()
     {
@@ -338,6 +340,7 @@ public class GUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GUI().setVisible(true);
@@ -401,6 +404,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

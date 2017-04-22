@@ -50,4 +50,12 @@ public class Post {
     {
         return timePosted;
     }
+    public String toString(){
+        String firstLine = picture.getAbsolutePath()+ " "+ownedBy.getUsername();
+        String secondLine = "";
+        for(int i = 0; i < hashtags.size(); i++){
+            secondLine += hashtags.get(i) + " ";
+        }
+        return firstLine +"\n" + secondLine;
+    }
 }

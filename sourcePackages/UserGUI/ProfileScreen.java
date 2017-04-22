@@ -16,9 +16,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import static UserGUI.UserLogin.uData;
 public class ProfileScreen extends javax.swing.JFrame {
-
+    protected static userDatabase uData;
+    protected static PostDatabase pData;
     /**
      * Creates new form ProfileScreen
      */
@@ -120,7 +120,7 @@ public class ProfileScreen extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         try{
-            fileWriter writer = new fileWriter(uData);
+            fileWriter writer = new fileWriter(uData,pData);
             System.out.println("Written");
         }
         catch(Exception e){
@@ -156,6 +156,8 @@ public class ProfileScreen extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        uData = UserLogin.uData;
+        pData = UserLogin.pData;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ProfileScreen().setVisible(true);

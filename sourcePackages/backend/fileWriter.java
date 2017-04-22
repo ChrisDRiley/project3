@@ -13,15 +13,24 @@ import java.util.*;
  * @author Christian
  */
 public class fileWriter{
-    PrintWriter writer = null;
-    public fileWriter(userDatabase uData) throws FileNotFoundException{
-        writer = new PrintWriter(
+    PrintWriter uwriter = null;
+    PrintWriter pwriter = null;
+    
+    public fileWriter(userDatabase uData, PostDatabase pData) throws FileNotFoundException{
+        uwriter = new PrintWriter(
                 new FileOutputStream("C:/Users/Christian/Documents/NetBeansProjects/project3/programData/users.txt",false));
         for(int i = 0; i < uData.size(); i++){
-            writer.println(uData.getUser(i).toString());
+            uwriter.println(uData.getUser(i).toString());
         }
-        writer.flush();
-        writer.close();
+        uwriter.flush();
+        uwriter.close();
+        
+        pwriter = new PrintWriter(new FileOutputStream("C:/Users/Christian/Documents/NetBeansProjects/project3/programData/posts.txt",false));
+        for(int i = 0; i < pData.size(); i++){
+            pwriter.println(pData.getPost(i).toString());
+        }
+        pwriter.flush();
+        pwriter.close();
     }
 }
 
