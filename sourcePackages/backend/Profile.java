@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import UserGUI.*;
 
 /**
  *
@@ -17,48 +18,39 @@ import java.util.Scanner;
  */
 public class Profile 
 {
-    private ArrayList<String> pictures = new ArrayList<>();
+    private ArrayList<Post> pictures = new ArrayList<Post>();
     private boolean followed;
     private String userName;
     private String profilePicture;
     private boolean exist;
+    public static userDatabase uData;
+    public static PostDatabase pData;
     
     /**
      * Default constructor for the Profile object
      * @param userName The user name of the profile.
-     * @throws FileNotFoundException If files are not found.
      */
-    public Profile(String userName) throws FileNotFoundException
+    public Profile(String userName) 
     {
+        uData = UserLogin.uData;
+        pData = UserLogin.pData;
         exist = true;
-        String pictureFile = userName + "userPictures.txt";
-        String profileConfig = userName + "profileConfig.txt";
-        String filePath = new File("").getAbsolutePath(); //Getting file path.
-        File pictureLibrary = new File(filePath + pictureFile); //Need to check if I need to add "/" between the concat.
-        File profileSetting = new File(filePath + profileConfig); //Need to check if I need to add "/" between the concat.
         
-        //Loading pictures belonging to profile into an arrayList to be used by another class.
-        Scanner fileRead = new Scanner(pictureLibrary);
-        while (fileRead.hasNextLine())
+        for(int i = 0; i < pData.size(); i++)
         {
-            pictures.add(filePath + fileRead.nextLine());
+            if(pData.getPost(i).getUser().getUsername().equalsIgnoreCase(userName)){
+                pictures.add(pData.getPost(i));
+            }
         }
         
         //Loading username and profile pictures into data members to be used by another class.
-        fileRead = new Scanner(profileSetting);
-        while (fileRead.hasNextLine())
-        {
-            String line = fileRead.nextLine();
-            String[] content = line.split("\\s+");
-            if (content[0].equalsIgnoreCase("userName:"))
-            {
-                this.userName = content[1];
-            }
-            else if (content[0].equalsIgnoreCase("profilePicture:"))
-            {
-                profilePicture = content[1];
+        for(int i = 0; i < uData.size(); i++){
+            if(uData.getUser(i).getUsername().equalsIgnoreCase(userName)){
+                this.userName = uData.getUser(i).getUsername();
+                profilePicture = uData.getUser(i).getPic().getAbsolutePath();
             }
         }
+   
     }
     
     public Profile(String name, File profilePic){
@@ -105,7 +97,7 @@ public class Profile
      * Getter method for a list of pictures associated with the profile.
      * @return An arrayList of image files.
      */
-    public ArrayList getPictures()
+    public ArrayList getPosts()
     {
         return pictures;
     }

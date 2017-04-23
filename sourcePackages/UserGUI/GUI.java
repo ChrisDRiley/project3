@@ -12,6 +12,7 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -24,7 +25,7 @@ import javax.swing.JOptionPane;
  * @author CJ
  */
 public class GUI extends javax.swing.JFrame {
-    public static userDatabase uData;
+    
     /**
      * Creates new form GUI
      */
@@ -106,6 +107,11 @@ public class GUI extends javax.swing.JFrame {
         txtSearch.setText("Search");
 
         btnSearch.setText("Go");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -243,6 +249,20 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProfileActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        if(jLabel4.getText().startsWith("Searching")){
+            if(posts.size()-1 != index){
+                currentPost(posts.get(index+1));
+                index++;
+            }
+            else{
+                 JOptionPane.showConfirmDialog(null, "There are no more posts to see",
+                 "Attention", JOptionPane.DEFAULT_OPTION, 
+                 JOptionPane.INFORMATION_MESSAGE, null);
+            }
+        }
+        else{
+            
+        
         if(pData.size()-1 != index){
             currentPost(pData.getPost(index+1));
             index++;
@@ -251,6 +271,7 @@ public class GUI extends javax.swing.JFrame {
             JOptionPane.showConfirmDialog(null, "There are no more posts to see",
             "Attention", JOptionPane.DEFAULT_OPTION, 
             JOptionPane.INFORMATION_MESSAGE, null);
+        }
         }
     }//GEN-LAST:event_btnNextActionPerformed
 
@@ -283,6 +304,12 @@ public class GUI extends javax.swing.JFrame {
             "Attention", JOptionPane.DEFAULT_OPTION, 
             JOptionPane.INFORMATION_MESSAGE, null);
         }
+        else if(currentUser == null){
+            guestFeed(pData);
+        }
+        else{
+            defaultFeed(pData,currentUser);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
@@ -307,6 +334,14 @@ public class GUI extends javax.swing.JFrame {
             pData.getPost(index).addLike();
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        if(txtSearch.getText().startsWith("#")){
+            SearchEngine search = new SearchEngine();
+            posts = search.searchTag(txtSearch.getText(), pData);
+            hashtagFeed(txtSearch.getText());
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
     
     public File getFile()
     {
@@ -368,6 +403,11 @@ public class GUI extends javax.swing.JFrame {
         jLabel4.setText("Main Feed (Guest)");
         currentPost(post);
     }
+    public void hashtagFeed(String hashtag){
+        index = 0;
+        jLabel4.setText("Searching: "+hashtag);
+        currentPost(posts.get(index));
+    }
     public void currentPost(Post post){
         File fileName = post.getPic();
         try{
@@ -391,6 +431,8 @@ public class GUI extends javax.swing.JFrame {
         g2d.dispose();
         return bi;
     }
+    public static userDatabase uData;
+    public ArrayList<Post> posts;
     public int index;
     public PostDatabase pData;
     public registeredUser currentUser;

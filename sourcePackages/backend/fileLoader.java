@@ -55,6 +55,7 @@ public class fileLoader {
             Post posting = new Post(picture, uData.getUser(position), finalHashtag);
             posting.addComment(comment);
             pData.addPost(posting);
+            System.out.println("Added a post");
         }
     }
     

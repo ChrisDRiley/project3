@@ -158,6 +158,7 @@ public class CreateUserScreen extends javax.swing.JFrame {
                 JOptionPane.INFORMATION_MESSAGE, null);
         }
         else{
+            uData = UserLogin.uData;
             String user = txtUserName.getText();
             String pass = txtEnterPass.getText();
             String fileName = "";
@@ -172,14 +173,14 @@ public class CreateUserScreen extends javax.swing.JFrame {
             }
             try{
                 uData.addUser(new registeredUser(user,pass,fileName));
-                System.out.println("Added "+uData.getUser(0).toString());
+                System.out.println("Added "+uData.getUser(uData.size()-1).toString());
             }
             catch(FileNotFoundException e){
                 e.printStackTrace();
             }
             //opens user profile
             ProfileScreen prof = new ProfileScreen();
-            prof.setUser(uData.getUser(0));
+            prof.setUser(uData.getUser(uData.size()-1));
             prof.setVisible(true);
             this.dispose();
             //closes out of create user window

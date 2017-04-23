@@ -14,8 +14,8 @@ import java.io.*;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 public class UserLogin extends javax.swing.JFrame {
-    protected static userDatabase uData;
-    protected static PostDatabase pData;
+    public static userDatabase uData;
+    public static PostDatabase pData;
     /**
      * Creates new form UserLogin
      */

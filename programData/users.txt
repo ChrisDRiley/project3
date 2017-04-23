@@ -1,2 +1,2 @@
 userName: Christian password: Riley profilePicture: C:\Users\Christian\Downloads\ColdDwarf.png
-userName: GOD password: HELPUS profilePicture: C:\Users\Christian\Downloads\ProfPic.png
+userName: Help password: Please profilePicture: C:\Users\Christian\Downloads\image_1560_1e-brown-dwarf.jpg

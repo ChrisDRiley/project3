@@ -17,8 +17,10 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 public class ProfileScreen extends javax.swing.JFrame {
-    protected static userDatabase uData;
-    protected static PostDatabase pData;
+    public static userDatabase uData;
+    public static PostDatabase pData;
+    public Profile profile;
+    
     /**
      * Creates new form ProfileScreen
      */
@@ -179,12 +181,14 @@ public class ProfileScreen extends javax.swing.JFrame {
     }
     public void setUser(registeredUser nUser){
         user = nUser;
-        File pic = this.user.getPic();
-        String info = this.user.getUsername();
-        jLabel2.setText(this.user.getUsername()+"'s Profile");
-        String fileName = pic.getAbsolutePath();
+        uData = UserLogin.uData;
+        pData = UserLogin.pData;
+        profile = new Profile(nUser.getUsername());
+        String info = profile.getUserName();
+        jLabel2.setText(profile.getUserName()+"'s Profile");
+        String fileName = profile.getProfilePicture();
         try{
-            ImageIcon ii = new ImageIcon(scaleImage(120,120,ImageIO.read(new File(pic.getAbsolutePath()))));
+            ImageIcon ii = new ImageIcon(scaleImage(120,120,ImageIO.read(new File(fileName))));
             jLabel1.setIcon(ii);
         }
         catch(Exception e){
