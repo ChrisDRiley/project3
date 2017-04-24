@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package backend;
+import UserGUI.*;
 import java.io.*;
 import java.nio.*;
 import java.util.*;
@@ -15,8 +16,17 @@ import java.util.*;
 public class fileWriter{
     PrintWriter uwriter = null;
     PrintWriter pwriter = null;
+    public static userDatabase uData;
+    public static PostDatabase pData;
     
-    public fileWriter(userDatabase uData, PostDatabase pData) throws FileNotFoundException{
+    public fileWriter() throws FileNotFoundException{
+        uData = UserLogin.uData;
+        pData = UserLogin.pData;
+        
+        
+    }
+    public void writeUser() throws FileNotFoundException{
+        
         uwriter = new PrintWriter(
                 new FileOutputStream("C:/Users/Christian/Documents/NetBeansProjects/project3/programData/users.txt",false));
         for(int i = 0; i < uData.size(); i++){
@@ -24,13 +34,24 @@ public class fileWriter{
         }
         uwriter.flush();
         uwriter.close();
-        
-        pwriter = new PrintWriter(new FileOutputStream("C:/Users/Christian/Documents/NetBeansProjects/project3/programData/posts.txt",false));
-        for(int i = 0; i < pData.size(); i++){
-            pwriter.println(pData.getPost(i).toString());
+    }
+    public void writePost() throws FileNotFoundException{
+        ArrayList<String> hashes = null;
+        pwriter = new PrintWriter(
+                new FileOutputStream("C:/Users/Christian/Documents/NetBeansProjects/project3/programData/posts.txt",false));
+        for(int l = 0; l < pData.size(); l++){
+            pwriter.println(pData.getPost(l).toString());
+            System.out.println("Added User");
+            hashes = pData.getPost(l).getHashtags();
+            for(int j = 0; j < hashes.size(); j++){
+                pwriter.print(hashes.get(j)+" ");
+                System.out.println("Added hashtag");
+            }
+            pwriter.println();
         }
         pwriter.flush();
         pwriter.close();
     }
+            
 }
 

@@ -336,11 +336,11 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        if(txtSearch.getText().startsWith("#")){
-            SearchEngine search = new SearchEngine();
-            posts = search.searchTag(txtSearch.getText(), pData);
-            hashtagFeed(txtSearch.getText());
-        }
+
+       SearchEngine search = new SearchEngine();
+       posts = search.searchTag(txtSearch.getText(), pData);
+       hashtagFeed(txtSearch.getText());
+        
     }//GEN-LAST:event_btnSearchActionPerformed
     
     public File getFile()

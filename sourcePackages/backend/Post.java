@@ -19,8 +19,9 @@ public class Post {
         ownedBy = user;
         comments = new ArrayList<String>();
         hashtags = new ArrayList<String>();
+        String sign = "\u0023";
         for(String hashes : hash){
-            hashtags.add(hashes);
+            hashtags.add(sign+hashes);
         }
         timePosted = LocalDateTime.now();
         likes = 0;

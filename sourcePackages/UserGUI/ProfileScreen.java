@@ -122,7 +122,9 @@ public class ProfileScreen extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         try{
-            fileWriter writer = new fileWriter(uData,pData);
+            fileWriter writer = new fileWriter();
+            writer.writeUser();
+            writer.writePost();
             System.out.println("Written");
         }
         catch(Exception e){
