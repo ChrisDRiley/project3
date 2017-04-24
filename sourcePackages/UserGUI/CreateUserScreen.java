@@ -180,7 +180,7 @@ public class CreateUserScreen extends javax.swing.JFrame {
             }
             //opens user profile
             ProfileScreen prof = new ProfileScreen();
-            prof.setUser(uData.getUser(uData.size()-1));
+            prof.setUser(uData.getUser(uData.size()-1),uData.getUser(uData.size()-1));
             prof.setVisible(true);
             this.dispose();
             //closes out of create user window

@@ -170,7 +170,7 @@ public class UserLogin extends javax.swing.JFrame {
 
     private void btnGuestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuestActionPerformed
         GUI loader = new GUI();
-        loader.guestFeed(pData);
+        loader.guestFeed(pData,uData);
         loader.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnGuestActionPerformed
@@ -194,7 +194,7 @@ public class UserLogin extends javax.swing.JFrame {
                         match = uData.getUser(i);
                     }
                 }
-                loggedin.defaultFeed(pData, match);
+                loggedin.defaultFeed(pData, match, uData);
                 loggedin.setVisible(true);
             }
             else

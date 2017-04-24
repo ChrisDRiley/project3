@@ -1,4 +1,6 @@
-C:\Users\Christian\Documents\s-l1600.jpg Christian
-#all   
+C:\Users\Christian\Documents\yNlQWRM.jpg Christian
+all 
+comment 
 C:\Users\Christian\Downloads\FBI.jpg Christian
-#all   
+all 
+comment 

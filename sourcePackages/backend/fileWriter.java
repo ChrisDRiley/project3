@@ -37,6 +37,8 @@ public class fileWriter{
     }
     public void writePost() throws FileNotFoundException{
         ArrayList<String> hashes = null;
+        ArrayList<String> comments = null;
+        
         pwriter = new PrintWriter(
                 new FileOutputStream("C:/Users/Christian/Documents/NetBeansProjects/project3/programData/posts.txt",false));
         for(int l = 0; l < pData.size(); l++){
@@ -46,6 +48,12 @@ public class fileWriter{
             for(int j = 0; j < hashes.size(); j++){
                 pwriter.print(hashes.get(j)+" ");
                 System.out.println("Added hashtag");
+            }
+            pwriter.println();
+            comments = pData.getPost(l).getComments();
+            for(int k = 0; k < comments.size(); k++){
+                pwriter.print(comments.get(k)+ " ");
+                System.out.println("Added comment");
             }
             pwriter.println();
         }

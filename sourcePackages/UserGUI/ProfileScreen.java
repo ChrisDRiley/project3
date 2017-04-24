@@ -106,6 +106,12 @@ public class ProfileScreen extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         GUI feed = new GUI();
+        if(currentUser != null){
+        feed.defaultFeed(pData, currentUser, uData);
+        }
+        else{
+        feed.guestFeed(pData, uData);
+        }
         feed.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -181,8 +187,9 @@ public class ProfileScreen extends javax.swing.JFrame {
         g2d.dispose();
         return bi;
     }
-    public void setUser(registeredUser nUser){
+    public void setUser(registeredUser nUser, registeredUser cUser){
         user = nUser;
+        currentUser = cUser;
         uData = UserLogin.uData;
         pData = UserLogin.pData;
         profile = new Profile(nUser.getUsername());
@@ -190,7 +197,7 @@ public class ProfileScreen extends javax.swing.JFrame {
         jLabel2.setText(profile.getUserName()+"'s Profile");
         String fileName = profile.getProfilePicture();
         try{
-            ImageIcon ii = new ImageIcon(scaleImage(120,120,ImageIO.read(new File(fileName))));
+            ImageIcon ii = new ImageIcon(scaleImage(jLabel1.getWidth(),jLabel1.getHeight(),ImageIO.read(new File(fileName))));
             jLabel1.setIcon(ii);
         }
         catch(Exception e){
@@ -199,6 +206,7 @@ public class ProfileScreen extends javax.swing.JFrame {
     }
  
     private registeredUser user;
+    private registeredUser currentUser;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

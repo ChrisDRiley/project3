@@ -16,13 +16,13 @@ public class SearchEngine
 {
     /**
      * This method will search through the user database for a matching username.
-     * @param userName The name of the profile to be searched.
+     * @param userName The name of the user to be searched.
      * @param users The database that will be used for the search.
-     * @return It will return a profile object to be manipulated by another class,
-     * if it does not exist then it will create a profile with the exist flag turned to false.
+     * @return It will return a registeredUser object to be manipulated by another class,
+     * if it does not exist then it will return null
      * @throws FileNotFoundException 
      */
-    public Profile searchUser(String userName, userDatabase users) throws FileNotFoundException
+    public registeredUser searchUser(String userName, userDatabase users)
     {
         boolean exist = false;
         int position = 0;
@@ -37,13 +37,11 @@ public class SearchEngine
         }
         if (exist)
         {
-            Profile account = new Profile(users.getUser(position).getUsername());
-            return account;
+            return users.getUser(position);
         }
         else
         {
-            Profile account = new Profile();
-            return account;
+            return null;
         }
     }
     

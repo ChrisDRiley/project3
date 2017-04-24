@@ -45,13 +45,13 @@ public class fileLoader {
                 }
             }
             line = input.nextLine();
-            String comment = line.substring(0, line.indexOf("#"));
-            String[] hashtags = line.substring(line.indexOf("#")).split("#");
+            String[] hashtags = line.split(" ");
             ArrayList<String> finalHashtag = new ArrayList<>();
-            for( int i = 1; i < hashtags.length; i++)
+            for( int i = 0; i < hashtags.length; i++)
             {
                 finalHashtag.add(hashtags[i]);
             }
+            String comment = input.nextLine();
             Post posting = new Post(picture, uData.getUser(position), finalHashtag);
             posting.addComment(comment);
             pData.addPost(posting);
