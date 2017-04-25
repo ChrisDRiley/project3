@@ -61,6 +61,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -163,6 +164,13 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setText("Follower Feed");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -184,23 +192,28 @@ public class GUI extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(btnLast))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton2)
-                        .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton3))
-                                .addComponent(btnUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(154, 154, 154)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton2)
+                                    .addComponent(jButton5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton3))
+                                    .addComponent(btnUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(68, 68, 68)
                         .addComponent(btnNext))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(224, 224, 224)
                         .addComponent(jLabel3)))
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,11 +241,12 @@ public class GUI extends javax.swing.JFrame {
                         .addGap(101, 101, 101)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUpload)
-                    .addComponent(jButton2))
+                    .addComponent(jButton5))
                 .addContainerGap())
         );
 
@@ -274,18 +288,27 @@ public class GUI extends javax.swing.JFrame {
                  JOptionPane.INFORMATION_MESSAGE, null);
             }
         }
-        else{
-            
-        
-        if(pData.size()-1 != index){
-            currentPost(pData.getPost(index+1));
-            index++;
+        else if(jLabel4.getText().startsWith("Your")){
+            if(posts.size()-1 != index){
+                currentPost(posts.get(index+1));
+                index++;
+            }
+            else{
+                 JOptionPane.showConfirmDialog(null, "There are no more posts to see",
+                 "Attention", JOptionPane.DEFAULT_OPTION, 
+                 JOptionPane.INFORMATION_MESSAGE, null);
+            }
         }
         else{
-            JOptionPane.showConfirmDialog(null, "There are no more posts to see",
-            "Attention", JOptionPane.DEFAULT_OPTION, 
-            JOptionPane.INFORMATION_MESSAGE, null);
-        }
+            if(pData.size()-1 != index){
+                currentPost(pData.getPost(index+1));
+                index++;
+            }
+            else{
+                JOptionPane.showConfirmDialog(null, "There are no more posts to see",
+                "Attention", JOptionPane.DEFAULT_OPTION, 
+                JOptionPane.INFORMATION_MESSAGE, null);
+            }
         }
     }//GEN-LAST:event_btnNextActionPerformed
 
@@ -327,14 +350,38 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
-        if(index != 0){
-            currentPost(pData.getPost(index - 1));
-            index--;
+        if(jLabel4.getText().startsWith("Searching")){
+            if(index != 0){
+                currentPost(posts.get(index-1));
+                index--;
+            }
+            else{
+                 JOptionPane.showConfirmDialog(null, "There are no more posts to see",
+                 "Attention", JOptionPane.DEFAULT_OPTION, 
+                 JOptionPane.INFORMATION_MESSAGE, null);
+            }
+        }
+        else if(jLabel4.getText().startsWith("Your")){
+            if(index != 0){
+                currentPost(posts.get(index-1));
+                index--;
+            }
+            else{
+                 JOptionPane.showConfirmDialog(null, "Cannot go back any further",
+                 "Attention", JOptionPane.DEFAULT_OPTION, 
+                 JOptionPane.INFORMATION_MESSAGE, null);
+            }
         }
         else{
-            JOptionPane.showConfirmDialog(null, "Cannot go back any further",
-            "Attention", JOptionPane.DEFAULT_OPTION, 
-            JOptionPane.INFORMATION_MESSAGE, null);
+            if(index != 0){
+                currentPost(pData.getPost(index - 1));
+                index--;
+            }
+            else{
+                JOptionPane.showConfirmDialog(null, "Cannot go back any further",
+                "Attention", JOptionPane.DEFAULT_OPTION, 
+                JOptionPane.INFORMATION_MESSAGE, null);
+            }
         }
     }//GEN-LAST:event_btnLastActionPerformed
 
@@ -367,6 +414,17 @@ public class GUI extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        if(currentUser == null){
+            JOptionPane.showConfirmDialog(null, "Guest users do not have followers",
+            "Attention", JOptionPane.DEFAULT_OPTION,
+            JOptionPane.INFORMATION_MESSAGE, null);
+        }
+        else{
+            followerFeed();
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
     
     public File getFile()
     {
@@ -417,16 +475,36 @@ public class GUI extends javax.swing.JFrame {
         currentUser = user;
         pData = pd;
         uData = ud;
+        if(posts != null){
+            posts.clear();
+        }
         Post post = pData.getPost(index);
         jLabel4.setText("Main Feed");
         currentPost(post);
         
+    }
+    public void followerFeed(){
+        posts = new ArrayList<Post>();
+        for(int i = 0; i < currentUser.getFollowers().size(); i++){
+            for(int j = 0; j < pData.size(); j++){
+                if(pData.getPost(j).getUser().getUsername().equalsIgnoreCase(
+                currentUser.getFollowers().get(i))){
+                    posts.add(pData.getPost(j));
+                }
+            }
+        }
+        index = 0;
+        jLabel4.setText("Your follower's posts");
+        currentPost(posts.get(index));
     }
     public void guestFeed(PostDatabase pd, userDatabase ud){
         index = 0;
         currentUser = null;
         pData = pd;
         uData = ud;
+        if(posts != null){
+            posts.clear();
+        }
         Post post = pData.getPost(index);
         jLabel4.setText("Main Feed (Guest)");
         currentPost(post);
@@ -460,7 +538,7 @@ public class GUI extends javax.swing.JFrame {
         return bi;
     }
     public static userDatabase uData;
-    public ArrayList<Post> posts;
+    public ArrayList<Post> posts = null;
     public int index;
     public PostDatabase pData;
     public registeredUser currentUser;
@@ -476,6 +554,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

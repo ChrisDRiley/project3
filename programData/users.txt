@@ -1,4 +1,6 @@
 userName: Christian password: Riley profilePicture: C:\Users\Christian\Downloads\ColdDwarf.png
 Hi mom
+Christian Help 
 userName: Help password: Please profilePicture: C:\Users\Christian\Downloads\image_1560_1e-brown-dwarf.jpg
 This is Help's user profile!
+Help 

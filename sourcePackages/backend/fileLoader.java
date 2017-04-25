@@ -9,6 +9,7 @@ import java.io.File;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 public class fileLoader {
     private Scanner input;
     private userDatabase uData;
@@ -24,12 +25,15 @@ public class fileLoader {
             String b = input.next();
             input.next();
             String c = input.next();
-            registeredUser user = new registeredUser(a,b,c);
             input.nextLine();
             String line = input.nextLine();
+            String follow = input.nextLine();
+            ArrayList<String> followers = new ArrayList<>(Arrays.asList(follow.split("\\s+")));
+            registeredUser user = new registeredUser(a,b,c,followers);
             user.setDescription(line);
             uData.addUser(user);
             System.out.println("Added a user");
+
         }
         
         input = new Scanner(new File("C:/Users/Christian/Documents/NetBeansProjects/project3/programData/posts.txt"));

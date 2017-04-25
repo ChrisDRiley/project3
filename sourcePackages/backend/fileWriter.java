@@ -26,12 +26,18 @@ public class fileWriter{
         
     }
     public void writeUser() throws FileNotFoundException{
-        
+        ArrayList<String> follows = null;
         uwriter = new PrintWriter(
                 new FileOutputStream("C:/Users/Christian/Documents/NetBeansProjects/project3/programData/users.txt",false));
         for(int i = 0; i < uData.size(); i++){
             uwriter.println(uData.getUser(i).toString());
             uwriter.println(uData.getUser(i).getDescription());
+            follows = uData.getUser(i).getFollowers();
+            for(int f = 0; f < follows.size(); f++){
+                uwriter.print(follows.get(f)+ " ");
+                System.out.println("Added follower");
+            }
+            uwriter.println();
         }
         uwriter.flush();
         uwriter.close();

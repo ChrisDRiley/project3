@@ -139,12 +139,24 @@ public class ProfileScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        JToggleButton btn = (JToggleButton) evt.getSource();
-        if(btn.isSelected()){
-            jToggleButton1.setText("Unfollow User");
+        if(currentUser == null){
+            JOptionPane.showConfirmDialog(null, "Guest users cannot follow other users",
+                    "Attention",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null);
+        }
+        else if(currentUser.equals(user)){
+            JOptionPane.showConfirmDialog(null, "You can't unfollow yourself",
+                    "Attention",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null);
         }
         else{
-            jToggleButton1.setText("Follow User");
+            JToggleButton btn = (JToggleButton) evt.getSource();
+            if(btn.isSelected()){ 
+                jToggleButton1.setText("Unfollow User");
+                currentUser.getFollowers().add(user.getUsername());
+            }
+            else{
+                jToggleButton1.setText("Follow User");
+                currentUser.getFollowers().remove(user.getUsername());
+            }
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
@@ -161,7 +173,11 @@ public class ProfileScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if(!currentUser.equals(user)){
+        if(currentUser == null){
+            JOptionPane.showConfirmDialog(null, "You must own this profile to change the description",
+                    "Attention",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null);
+        }
+        else if(!currentUser.equals(user)){
             JOptionPane.showConfirmDialog(null, "You must own this profile to change the description",
                     "Attention",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null);
         }
@@ -231,6 +247,14 @@ public class ProfileScreen extends javax.swing.JFrame {
         jLabel2.setText(profile.getUserName()+"'s Profile");
         jTextArea1.setText(profile.getDescription());
         String fileName = profile.getProfilePicture();
+        if(currentUser != null){
+            for(int i = 0; i < currentUser.getFollowers().size(); i++){
+                if(currentUser.getFollowers().get(i).equals(user.getUsername())){
+                    jToggleButton1.setSelected(true);
+                    jToggleButton1.setText("Unfollow User");
+                }
+            }
+        }
         try{
             ImageIcon ii = new ImageIcon(scaleImage(jLabel1.getWidth(),jLabel1.getHeight(),ImageIO.read(new File(fileName))));
             jLabel1.setIcon(ii);

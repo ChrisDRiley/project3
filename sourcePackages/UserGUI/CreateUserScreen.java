@@ -9,6 +9,7 @@ package UserGUI;
 import backend.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -162,6 +163,8 @@ public class CreateUserScreen extends javax.swing.JFrame {
             String user = txtUserName.getText();
             String pass = txtEnterPass.getText();
             String fileName = "";
+            ArrayList<String> selfFollow = new ArrayList<String>();
+            selfFollow.add(user);
             int selection = JOptionPane.showConfirmDialog(null, "Please select an image for you profile",
                 "Attention", JOptionPane.DEFAULT_OPTION, 
                 JOptionPane.INFORMATION_MESSAGE, null);
@@ -172,7 +175,7 @@ public class CreateUserScreen extends javax.swing.JFrame {
                 fileName = f.getAbsolutePath();
             }
             try{
-                uData.addUser(new registeredUser(user,pass,fileName));
+                uData.addUser(new registeredUser(user,pass,fileName,selfFollow));
                 System.out.println("Added "+uData.getUser(uData.size()-1).toString());
             }
             catch(FileNotFoundException e){

@@ -5,6 +5,7 @@
  */
 package backend;
 import java.io.*;
+import java.util.ArrayList;
 /**
  *
  * @author Christian
@@ -12,14 +13,18 @@ import java.io.*;
 public class registeredUser extends guestUser{
     private String username;
     private String password;
+    private ArrayList<String> followers;
     private File profilePic;
     private String description;
     
-    public registeredUser(String name, String pass, String profPic) throws FileNotFoundException{
+    public registeredUser(String name, String pass, String profPic,ArrayList<String> follow) throws FileNotFoundException{
         canLike = true;
         canComment = true;
         username = name;
         password = pass;
+        followers = new ArrayList<String>();
+        for(int i = 0; i < follow.size(); i++){
+            followers.add(follow.get(i));        }
         try{
             profilePic = new File(profPic);
         }
@@ -38,6 +43,9 @@ public class registeredUser extends guestUser{
     }
     public String getDescription(){
         return description;
+    }
+    public ArrayList<String> getFollowers(){
+        return followers;
     }
     public void setDescription(String replace){
         description = replace;
