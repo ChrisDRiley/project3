@@ -5,15 +5,12 @@
  */
 package UserGUI;
 
-import java.awt.BorderLayout;
+import backend.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,12 +29,20 @@ public class Upload extends javax.swing.JFrame {
     /**
      * Creates new form Upload
      */
-    public Upload(File file) throws IOException {
+    public Upload(File file,registeredUser user) throws IOException {
         initComponents();
-        img = ImageIO.read(file);
-        picLabel = new JLabel(new ImageIcon(img));
-        picturePreview.add(picLabel);
-        picturePreview.setVisible(true);
+        currentUser = user;
+        uData = UserLogin.uData;
+        pData = UserLogin.pData;
+        fileName = file.getAbsolutePath();
+        try{
+            ImageIcon ii = new ImageIcon(scaleImage(picturePreview.getWidth(),
+                    picturePreview.getHeight(),ImageIO.read(new File(fileName))));
+            picturePreview.setIcon(ii);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
     
     public Upload()
@@ -54,20 +59,16 @@ public class Upload extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        hashtagTextField = new javax.swing.JTextField();
+        captiontextfield = new javax.swing.JTextField();
         cancel = new javax.swing.JButton();
         upload = new javax.swing.JButton();
         hashtagLabel = new javax.swing.JLabel();
-        picturePreview = new javax.swing.JPanel();
+        picturePreview = new javax.swing.JLabel();
+        hashtagTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        hashtagTextField.setText("");
-        hashtagTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hashtagTextFieldActionPerformed(evt);
-            }
-        });
+        captiontextfield.setText("");
 
         cancel.setText("Cancel");
         cancel.addActionListener(new java.awt.event.ActionListener() {
@@ -85,43 +86,40 @@ public class Upload extends javax.swing.JFrame {
 
         hashtagLabel.setText("Hashtags");
 
-        javax.swing.GroupLayout picturePreviewLayout = new javax.swing.GroupLayout(picturePreview);
-        picturePreview.setLayout(picturePreviewLayout);
-        picturePreviewLayout.setHorizontalGroup(
-            picturePreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 406, Short.MAX_VALUE)
-        );
-        picturePreviewLayout.setVerticalGroup(
-            picturePreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 311, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(140, 140, 140)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(picturePreview, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(hashtagLabel)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(upload)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
-                            .addComponent(cancel))
-                        .addComponent(hashtagTextField)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(hashtagLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(hashtagTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(upload)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
+                                .addComponent(cancel))
+                            .addComponent(captiontextfield)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(190, 190, 190)
+                        .addComponent(picturePreview, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(140, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(picturePreview, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(hashtagLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(hashtagTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(picturePreview, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hashtagLabel)
+                    .addComponent(hashtagTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(captiontextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancel)
@@ -133,7 +131,7 @@ public class Upload extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void uploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadActionPerformed
-        File file = new File("C:/Users/Christian/Documents/NetBeansProjects/project3/index.txt");
+        /*File file = new File("C:/Users/Christian/Documents/NetBeansProjects/project3/index.txt");
         int index = 0;
         try {
             try (Scanner fileRead = new Scanner(file)) {
@@ -162,14 +160,21 @@ public class Upload extends javax.swing.JFrame {
         } catch (IOException ex1) {
             Logger.getLogger(Upload.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }
+        }*/
+        String rawHash = "all "+hashtagTextField.getText();
+        ArrayList<String> hashtags = new ArrayList<>(Arrays.asList(rawHash.split("\\s+")));
+        Post post = new Post(fileName, currentUser, hashtags,0);
+        post.addComment(captiontextfield.getText());
+        pData.addPost(post);
+        System.out.println("Uploaded post");
+        GUI backToMain = new GUI();
+        backToMain.defaultFeed(pData, currentUser, uData);
+        backToMain.setVisible(true);
+        this.dispose();
+        
         
         
     }//GEN-LAST:event_uploadActionPerformed
-
-    private void hashtagTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hashtagTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_hashtagTextFieldActionPerformed
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
         this.setVisible(true);
@@ -203,18 +208,34 @@ public class Upload extends javax.swing.JFrame {
         //</editor-fold>
         
         /* Create and display the form */
+        uData = UserLogin.uData;
+        pData = UserLogin.pData;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Upload().setVisible(true);
             }
         });
     }
-
+    public static BufferedImage scaleImage(int w, int h, BufferedImage img)throws Exception {
+        BufferedImage bi;
+        bi = new BufferedImage(w,h,BufferedImage.TRANSLUCENT);
+        Graphics2D g2d = (Graphics2D) bi.createGraphics();
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY));
+        g2d.drawImage(img, 0, 0, w, h, null);
+        g2d.dispose();
+        return bi;
+    }
+    public static userDatabase uData;
+    public static PostDatabase pData;
+    public String fileName;
+    public registeredUser currentUser;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancel;
+    private javax.swing.JTextField captiontextfield;
     private javax.swing.JLabel hashtagLabel;
     private javax.swing.JTextField hashtagTextField;
-    private javax.swing.JPanel picturePreview;
+    private javax.swing.JLabel picturePreview;
     private javax.swing.JButton upload;
     // End of variables declaration//GEN-END:variables
 }

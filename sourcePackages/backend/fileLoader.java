@@ -44,6 +44,7 @@ public class fileLoader {
             String[] header = line.split("\\s+");
             String picture = header[0];
             String name = header[1];
+            int numLikes = Integer.parseInt(header[2]);
             int position = -1;
             for (int i = 0; i < uData.size(); i++)
             {
@@ -53,14 +54,14 @@ public class fileLoader {
                 }
             }
             line = input.nextLine();
-            String[] hashtags = line.split(" ");
+            String[] hashtags = line.split("\\s+");
             ArrayList<String> finalHashtag = new ArrayList<>();
             for( int i = 0; i < hashtags.length; i++)
             {
                 finalHashtag.add(hashtags[i]);
             }
             String comment = input.nextLine();
-            Post posting = new Post(picture, uData.getUser(position), finalHashtag);
+            Post posting = new Post(picture, uData.getUser(position), finalHashtag, numLikes);
             posting.addComment(comment);
             pData.addPost(posting);
             System.out.println("Added a post");

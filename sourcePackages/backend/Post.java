@@ -13,7 +13,7 @@ public class Post {
     private registeredUser ownedBy;
     private LocalDateTime timePosted;
     
-    public Post(String pic, registeredUser user, ArrayList<String> hash){
+    public Post(String pic, registeredUser user, ArrayList<String> hash, int numLikes){
        
         picture = new File(pic);
         ownedBy = user;
@@ -24,7 +24,7 @@ public class Post {
             hashtags.add(hashes);
         }
         timePosted = LocalDateTime.now();
-        likes = 0;
+        likes = numLikes;
     }
     public void addLike(){
         likes++;
@@ -52,6 +52,6 @@ public class Post {
         return timePosted;
     }
     public String toString(){
-        return picture.getAbsolutePath()+ " "+ownedBy.getUsername();
+        return picture.getAbsolutePath()+ " "+ownedBy.getUsername()+" "+likes;
     }
 }

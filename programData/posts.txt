@@ -1,9 +1,12 @@
-C:\Users\Christian\Documents\yNlQWRM.jpg Christian
+C:\Users\Christian\Documents\yNlQWRM.jpg Christian 2
 all 
-comment              
-C:\Users\Christian\Downloads\FBI.jpg Christian
+caption           
+C:\Users\Christian\Downloads\FBI.jpg Christian 6
 all 
-comment         
-C:\Users\Christian\Documents\5075600_sd.jpg Help
+caption               
+C:\Users\Christian\Documents\5075600_sd.jpg Help 5
 all 
-comment         
+caption      
+C:\Users\Christian\Pictures\Jerseys.png Christian 76
+all help 
+Please help me I'm dying     
