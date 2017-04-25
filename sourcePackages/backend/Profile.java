@@ -22,6 +22,7 @@ public class Profile
     private boolean followed;
     private String userName;
     private String profilePicture;
+    private String description;
     private boolean exist;
     public static userDatabase uData;
     public static PostDatabase pData;
@@ -48,6 +49,7 @@ public class Profile
             if(uData.getUser(i).getUsername().equalsIgnoreCase(userName)){
                 this.userName = uData.getUser(i).getUsername();
                 profilePicture = uData.getUser(i).getPic().getAbsolutePath();
+                description = uData.getUser(i).getDescription();
             }
         }
    
@@ -82,6 +84,12 @@ public class Profile
     public String getUserName()
     {
         return userName;
+    }
+    public void setDescription(String replace){
+        description = replace;
+    }
+    public String getDescription(){
+        return description;
     }
     
     /**

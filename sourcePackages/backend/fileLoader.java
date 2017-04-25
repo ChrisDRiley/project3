@@ -25,7 +25,11 @@ public class fileLoader {
             input.next();
             String c = input.next();
             registeredUser user = new registeredUser(a,b,c);
+            input.nextLine();
+            String line = input.nextLine();
+            user.setDescription(line);
             uData.addUser(user);
+            System.out.println("Added a user");
         }
         
         input = new Scanner(new File("C:/Users/Christian/Documents/NetBeansProjects/project3/programData/posts.txt"));

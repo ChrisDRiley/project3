@@ -13,6 +13,7 @@ public class registeredUser extends guestUser{
     private String username;
     private String password;
     private File profilePic;
+    private String description;
     
     public registeredUser(String name, String pass, String profPic) throws FileNotFoundException{
         canLike = true;
@@ -35,7 +36,16 @@ public class registeredUser extends guestUser{
     public File getPic(){
         return profilePic;
     }
+    public String getDescription(){
+        return description;
+    }
+    public void setDescription(String replace){
+        description = replace;
+    }
     public String toString(){
         return "userName: "+username+" password: "+password+" profilePicture: "+profilePic.getPath();
+    }
+    public boolean equals(registeredUser user2){
+        return username.equals(user2.getUsername());
     }
 }

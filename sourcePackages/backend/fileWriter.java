@@ -31,6 +31,7 @@ public class fileWriter{
                 new FileOutputStream("C:/Users/Christian/Documents/NetBeansProjects/project3/programData/users.txt",false));
         for(int i = 0; i < uData.size(); i++){
             uwriter.println(uData.getUser(i).toString());
+            uwriter.println(uData.getUser(i).getDescription());
         }
         uwriter.flush();
         uwriter.close();
